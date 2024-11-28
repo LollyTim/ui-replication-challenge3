@@ -1,101 +1,132 @@
-import Image from "next/image";
+'use client';
+import React, { useState } from 'react';
+import Image from 'next/image';
 
-export default function Home() {
+const LandingPage = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleToggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <div
+      className="relative min-h-screen bg-cover bg-center bg-no-repeat flex flex-col bg-white"
+      style={{ backgroundImage: 'url("/Group 1 (1).png")' }}
+    >
+      {/* Navbar */}
+      <nav className="w-full px-4 py-3 md:py-6 lg:px-0">
+        <div className="w-[90%] max-w-6xl mx-auto flex justify-between items-center">
+          {/* Logo */}
+          <div className="w-32 md:w-40 lg:w-48">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/Logo (1).png"
+              alt="Puerii Logo"
+              width={90}
+              height={50}
+              className="object-contain"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-6">
+            <nav className="flex space-x-6 text-black">
+              {['Product', 'Integration', 'Demo', 'Resources', 'Pricing', 'FAQ'].map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className="text-base lg:text-lg hover:text-gray-500 transition-colors"
+                >
+                  {item}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          {/* Call-to-Actions */}
+          <div className="flex items-center gap-4">
+            <a href="#" className="text-sm md:text-base text-[#5350F7]">
+              Sign In
+            </a>
+            <button className="hidden lg:block bg-[#5350F7] text-white px-5 py-2 md:px-6 md:py-3 rounded-lg transition-colors">
+              Create a Plan
+            </button>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <div className="lg:hidden">
+            <button
+              onClick={handleToggleMobileMenu}
+              className="text-black text-2xl focus:outline-none"
+              aria-label="Toggle mobile menu"
+            >
+              {mobileMenuOpen ? '✕' : '☰'}
+            </button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+
+        {/* Mobile Menu Overlay */}
+        {mobileMenuOpen && (
+          <div className="fixed inset-0 bg-black/80 z-50 lg:hidden" onClick={handleToggleMobileMenu}>
+            <div className="flex flex-col items-center justify-center h-full space-y-6 text-white">
+              {['Children\'s Plans', 'Investments', 'Testimonies', 'FAQ'].map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className="text-xl"
+                  onClick={handleToggleMobileMenu}
+                >
+                  {item}
+                </a>
+              ))}
+              <button
+                className="bg-white text-black px-6 py-3 rounded-lg"
+                onClick={handleToggleMobileMenu}
+              >
+                Create a Plan
+              </button>
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <div className="w-[90%] max-w-6xl mx-auto px-4 flex-grow flex flex-col justify-center mt-12 lg:mt-28">
+        <div className="flex flex-col lg:flex-row items-center justify-center space-y-8 lg:space-y-0 lg:space-x-8">
+          <div className="max-w-xl mx-auto flex flex-col items-center lg:items-center text-center lg:text-left gap-8">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl text-center font-bold leading-snug">
+              Seamlessly manage your{' '}
+              <span className="text-[#5350F7]">equity & cap-table</span>
+            </h1>
+            <p className="text-sm md:text-base text-center lg:text-lg text-gray-700">
+              Manage people and equity, automate team’s payroll, and manage access all in one place.
+              Human resource has never been better.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button className="bg-[#5350F7] text-white px-5 py-2 md:px-6 md:py-3 rounded-lg">
+                Get started for free
+              </button>
+              <button className="flex items-center border border-black text-black px-5 py-2 md:px-6 md:py-3 rounded-lg">
+                <img src="/arrow-right.svg" alt="Arrow" className="mr-2" />
+                Watch Demo
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Hero Image */}
+        <div className="mt-12">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/Overview.png"
+            alt="Overview"
+            width={1200}
+            height={600}
+            className="w-full max-w-4xl mt-10 mx-auto object-contain"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default LandingPage;
