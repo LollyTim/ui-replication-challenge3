@@ -22,7 +22,7 @@ const LandingPage = () => {
             <Image
               src="/Logo (1).png"
               alt="Puerii Logo"
-              width={90}
+              width={120}
               height={50}
               className="object-contain"
             />
@@ -44,7 +44,7 @@ const LandingPage = () => {
           </div>
 
           {/* Call-to-Actions */}
-          <div className="flex items-center gap-4">
+          <div className=" hidden lg:flex items-center gap-4">
             <a href="#" className="text-sm md:text-base text-[#5350F7]">
               Sign In
             </a>
@@ -60,45 +60,70 @@ const LandingPage = () => {
               className="text-black text-2xl focus:outline-none"
               aria-label="Toggle mobile menu"
             >
-              {mobileMenuOpen ? '✕' : '☰'}
+              ☰
             </button>
           </div>
         </div>
+      </nav>
 
-        {/* Mobile Menu Overlay */}
-        {mobileMenuOpen && (
-          <div className="fixed inset-0 bg-black/80 z-50 lg:hidden" onClick={handleToggleMobileMenu}>
-            <div className="flex flex-col items-center justify-center h-full space-y-6 text-white">
-              {['Children\'s Plans', 'Investments', 'Testimonies', 'FAQ'].map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="text-xl"
-                  onClick={handleToggleMobileMenu}
-                >
-                  {item}
-                </a>
-              ))}
-              <button
-                className="bg-white text-black px-6 py-3 rounded-lg"
+      {/* Sliding Mobile Menu */}
+      <div
+        className={`fixed inset-0 z-50 flex transition-transform duration-300 ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+      >
+        {/* Overlay */}
+        <div
+          className="absolute inset-0 bg-black/50 -z-10 lg:hidden"
+          onClick={handleToggleMobileMenu}
+        ></div>
+
+        {/* Menu */}
+        <div className="ml-auto bg-white w-64 max-w-full h-full shadow-lg px-6 py-4 flex flex-col">
+          {/* Close Button */}
+          <button
+            className="self-end text-black text-2xl focus:outline-none mb-4"
+            onClick={handleToggleMobileMenu}
+            aria-label="Close mobile menu"
+          >
+            ✕
+          </button>
+
+          {/* Menu Items */}
+          <nav className="flex flex-col space-y-4">
+            {['Product', 'Integration', 'Demo', 'Resources', 'Pricing', 'FAQ'].map((item) => (
+              <a
+                key={item}
+                href="#"
+                className="text-lg text-gray-800 hover:text-[#5350F7] transition-colors"
                 onClick={handleToggleMobileMenu}
               >
-                Create a Plan
-              </button>
-            </div>
+                {item}
+              </a>
+            ))}
+          </nav>
+
+          {/* Call-to-Action Button */}
+          <div className='justify-center items-center  mt-8 flex flex-col '>
+            <a href="#" className="text-sm md:text-base text-[#5350F7]">
+              Sign In
+            </a>
+            <button className="mt-10 bg-[#5350F7] text-white px-6 py-3 rounded-lg">
+              Create a Plan
+            </button>
+
           </div>
-        )}
-      </nav>
+        </div>
+      </div>
 
       {/* Hero Section */}
       <div className="w-[90%] max-w-6xl mx-auto px-4 flex-grow flex flex-col justify-center mt-12 lg:mt-28">
         <div className="flex flex-col lg:flex-row items-center justify-center space-y-8 lg:space-y-0 lg:space-x-8">
-          <div className="max-w-xl mx-auto flex flex-col items-center lg:items-center text-center lg:text-left gap-8">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl text-center font-bold leading-snug">
+          <div className="max-w-xl mx-auto flex flex-col items-center text-center lg:text-left gap-8">
+            <h1 className="text-3xl md:text-4xl text-center lg:text-5xl font-bold leading-snug">
               Seamlessly manage your{' '}
               <span className="text-[#5350F7]">equity & cap-table</span>
             </h1>
-            <p className="text-sm md:text-base text-center lg:text-lg text-gray-700">
+            <p className="text-sm md:text-base lg:text-lg text-gray-700 text-center">
               Manage people and equity, automate team’s payroll, and manage access all in one place.
               Human resource has never been better.
             </p>
@@ -121,7 +146,7 @@ const LandingPage = () => {
             alt="Overview"
             width={1200}
             height={600}
-            className="w-full max-w-4xl mt-10 mx-auto object-contain"
+            className="w-full max-w-4xl mx-auto object-contain"
           />
         </div>
       </div>
